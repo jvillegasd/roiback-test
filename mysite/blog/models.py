@@ -8,12 +8,12 @@ POST_STATUS = (
 )
 
 TRANSACTIONS_TYPES = (
-  (0, "Post_creation"),
-  (1, "Post_deletion"),
-  (2, "Post_modification"),
-  (3, "Post_comment"),
-  (4, "Post_like"),
-  (5, "User_creation")
+  ("post_creation", "Post_creation"),
+  ("post_deletion", "Post_deletion"),
+  ("Post_modification", "Post_modification"),
+  ("post_comment", "Post_comment"),
+  ("post_like", "Post_like"),
+  ("user_creation", "User_creation")
 )
 
 # Create your models here.
@@ -24,7 +24,7 @@ class Category(models.Model):
   class Meta:
     ordering = ("name",)
     verbose_name = "category"
-    verbose_plural_name = "categories"
+    verbose_name_plural = "categories"
   
   def __str__(self):
     return f"<Category: {self.name}>"
@@ -37,15 +37,15 @@ class Post(models.Model):
   content = models.TextField()
   likes = models.ManyToManyField(User, related_name="likes")
   tags = TaggableManager()
-  category = models.ForeignKey(Category)
-  status = models.CharField(choices=POST_STATUS, default="draft")
+  category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+  status = models.CharField(choices=POST_STATUS, default="draft", max_length=13)
   publish_date = models.DateTimeField()
   deactivate_date = models.DateTimeField()
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
 
   class Meta:
-    ordering = ["-created-at"]
+    ordering = ["-created_at"]
   
   def __str__(self):
     return f"<Post: {self.title}>"
@@ -74,11 +74,11 @@ class PostComment(models.Model):
 
 class Transaction(models.Model):
   author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_transactions")
-  transaction_type = models.IntegerField(choices=TRANSACTIONS_TYPES)
+  transaction_type = models.CharField(choices=TRANSACTIONS_TYPES, max_length=60)
   created_at = models.DateTimeField(auto_now_add=True)
 
   class Meta:
-    ordering = ["-created-at"]
+    ordering = ["-created_at"]
 
   def __str__(self):
     return f"<Transaction: {self.author.username}, {self.transaction_type}>"
