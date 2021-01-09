@@ -1,0 +1,32 @@
+body {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 94, 238, 0.8) 45%, #ffffff 0%)
+}
+
+#sign_in_btn {
+  position: absolute;
+  right: 3%;
+  top: 3%;
+}
+
+#content {
+  text-align: center;
+  height: 300px;
+  width: 500px;
+
+  position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  	
+	margin: auto;
+}
+
+#text_p {
+  margin-top: 110px;
+}
+
+h1 {
+  color: white;
+}
