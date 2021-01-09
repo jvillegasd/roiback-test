@@ -68,7 +68,7 @@ class PostComment(models.Model):
   class Meta:
     ordering = ["-posted_at"]
   
-  class __str__(self):
+  def __str__(self):
     return f"<PostComent: {self.author.username}, {self.post.title}>"
 
 
