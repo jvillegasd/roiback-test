@@ -10,9 +10,46 @@
   <!-- Bootstrap, JavaScript Bundle with Popper -->
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
-  <p>Hello dashboard</p>
+  
+  <div>
+    <button id="logout_btn" class="btn btn-outline-light btn-lg">Log out</button>
+  </div>
+
+  <h1 id="web_title" class="text-center">Web blog App</h1>
+
+  <div id="card_entries" class="card">
+    <div class="card-body">
+      <h3 class="card-title text-center">Last entries</h3>
+      
+    </div>
+  </div>
+
+  <div id="card_filters" class="card">
+    <div class="card-body  text-center">
+      <h3 class="card-title">Filters</h3>
+
+      <div id="dropdown_filters" class="btn-group btn-md w-75" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </button>
+        <div class="dropdown-menu w-100" aria-labelledby="btnGroupDrop1">
+          <a class="dropdown-item" href="#">Dropdown link</a>
+          <a class="dropdown-item" href="#">Dropdown link</a>
+        </div>
+      </div>
+
+      <div id="btn_filters" class="btn-group-vertical btn-md w-75" role="group" aria-label="filters">
+        <button type="button" class="btn btn-secondary">Author</button>
+        <button type="button" class="btn btn-secondary">Category</button>
+        <button type="button" class="btn btn-secondary">Tags</button>
+        <button type="button" class="btn btn-danger">Delete filters</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

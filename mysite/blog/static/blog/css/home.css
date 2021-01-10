@@ -1,0 +1,50 @@
+body {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 94, 238, 0.8) 45%, #ffffff 0%)
+}
+
+#logout_btn {
+  position: absolute;
+  right: 3%;
+  top: 3%;
+}
+
+#web_title {
+  color: white;
+  position: absolute;
+  top: 13%;
+  left: 0;
+  right: 0;
+}
+
+#card_entries {
+  border-radius: 20px !important;
+  height: 550px !important;
+  width: 800px !important;
+  position: absolute;
+	top: 15%;
+	bottom: 0;
+	left: 0;
+	right: 37%;
+	margin: auto;
+}
+
+#card_filters {
+  border-radius: 20px !important;
+  height: 350px !important;
+  width: 300px !important;
+  position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 47%;
+	right: 0;
+	margin: auto;
+}
+
+#btn_filters, #btn_filters {
+  margin-top: 30px;
+}
+
+#dropdown_filters {
+  margin-top: 20px;
+}
