@@ -3,9 +3,9 @@ body {
   background: linear-gradient(rgba(0, 94, 238, 0.8) 45%, #ffffff 0%)
 }
 
-#card_signin {
+#card_signup {
   border-radius: 20px !important;
-  height: 350px !important;
+  height: 450px !important;
   width: 400px !important;
   position: absolute;
 	top: 0;
@@ -19,7 +19,7 @@ body {
   margin-left: 12%;
 }
 
-#form_signin {
+#form_signup {
   margin-top: 10%;
 }
 
