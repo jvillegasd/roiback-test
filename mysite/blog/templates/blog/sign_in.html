@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Sign in</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'blog/css/sign_in.css' %}">
+  <!-- Bootstrap, JavaScript Bundle with Popper -->
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</head>
+<body>
+  {% block content %}
+
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  <h1 id="web_title" class="text-center">Web blog App</h1>
+  <div id="card_signin" class="card">
+    <div class="card-body">
+      <h3 class="card-title text-center">Sign in</h3>
+      <form id="form_signin" method="post" role="form">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-group mb-3 w-75">
+          <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
+          {{ form.username }}
+          {{ form.username.errors }}
+        </div>
+        <div class="form-group mb-3 w-75">
+          <label for="{{ form.password.id_for_label }}" class="form-label">Password</label>
+          {{ form.password }}
+          {{ form.password.errors }}
+        </div>
+        <button id="form_btn" type="submit" class="btn btn-primary btn-md w-75">Login</button>        
+      </form>
+    </div>
+  </div>
+
+  {% endblock %}
+</body>
+</html>

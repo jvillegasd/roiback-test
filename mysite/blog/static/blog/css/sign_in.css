@@ -1,0 +1,36 @@
+body {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 94, 238, 0.8) 45%, #ffffff 0%)
+}
+
+#card_signin {
+  border-radius: 20px !important;
+  height: 350px !important;
+  width: 400px !important;
+  position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.form-group, #form_btn {
+  margin-left: 12%;
+}
+
+#form_signin {
+  margin-top: 10%;
+}
+
+.card-title {
+  margin-top: 3%;
+}
+
+#web_title {
+  color: white;
+  position: absolute;
+  top: 20%;
+  left: 0;
+  right: 0;
+}
