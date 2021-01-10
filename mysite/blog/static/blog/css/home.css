@@ -9,6 +9,12 @@ body {
   top: 3%;
 }
 
+#create_post_btn {
+  position: absolute;
+  right: 220px;
+  top: 3%;
+}
+
 #web_title {
   color: white;
   position: absolute;
@@ -47,4 +53,28 @@ body {
 
 #dropdown_filters {
   margin-top: 20px;
+}
+
+.entry_item {
+  width: 600px;
+}
+
+.entry_item > .card-body {
+  height: 100px;
+}
+
+#entries_list {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.entry_stats {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+}
+
+.comment_stat {
+  margin-left: 10px !important;
 }

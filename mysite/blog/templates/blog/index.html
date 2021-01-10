@@ -14,7 +14,7 @@
 </head>
 <body class="container">
   <div id="nav_bar">
-    <a href="/sign_in">
+    <a href="{% url 'blog:sign_in' %}">
       <button id="sign_in_btn" class="btn btn-outline-light btn-lg">Sign in</button>
     </a>
   </div>
@@ -22,7 +22,7 @@
     <h1>Web blog App</h1>
     <div id="text_p">
       <h2>Roiback backend developer test</h2>
-      <a href="/sign_up">
+      <a href="{% url 'blog:sign_up' %}">
         <button class="btn-primary btn-lg">Start blogging</button>
       </a>
     </div>

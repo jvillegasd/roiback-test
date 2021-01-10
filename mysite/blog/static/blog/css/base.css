@@ -1,0 +1,24 @@
+body {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 94, 238, 0.8) 45%, #ffffff 0%)
+}
+
+#logout_btn {
+  position: absolute;
+  right: 3%;
+  top: 3%;
+}
+
+#create_post_btn {
+  position: absolute;
+  right: 220px;
+  top: 3%;
+}
+
+#web_title {
+  color: white;
+  position: absolute;
+  top: 13%;
+  left: 0;
+  right: 0;
+}
