@@ -6,7 +6,7 @@ services:
     build:
       context: ./mysite/
       dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
+    command: "python manage.py runserver 0.0.0.0:8000"
     env_file: .env
     restart: always
     volumes:
@@ -14,7 +14,7 @@ services:
     depends_on:
       - blog-db
     ports:
-      - 2500:8000
+      - 2501:8000
     networks:
       - roiback-net
   blog-db:

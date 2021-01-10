@@ -10,14 +10,36 @@
   <!-- Bootstrap, JavaScript Bundle with Popper -->
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
   {% block content %}
 
   {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
+  <script>
+    $(function() {
+      $('#error_modal').modal({show: true});
+    });
+  </script>
   {% endif %}
+
+  <div id="error_modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Error</h5>
+        </div>
+        <div class="modal-body">
+          <p>{{ form.errors }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <a href="/">
     <h1 id="web_title" class="text-center">Web blog App</h1>
@@ -30,17 +52,14 @@
         <div class="form-group mb-3 w-75">
           <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
           {{ form.username }}
-          {{ form.username.errors }}
         </div>
         <div class="form-group mb-3 w-75">
           <label for="{{ form.password1.id_for_label }}" class="form-label">Password</label>
           {{ form.password1 }}
-          {{ form.password1.errors }}
         </div>
         <div class="form-group mb-3 w-75">
           <label for="{{ form.password2.id_for_label }}" class="form-label">Password confirmation</label>
           {{ form.password2 }}
-          {{ form.password2.errors }}
         </div>
         <button id="form_btn" type="submit" class="btn btn-primary btn-md w-75">Sign up</button>        
       </form>

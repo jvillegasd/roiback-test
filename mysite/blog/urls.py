@@ -9,5 +9,6 @@ urlpatterns = [
         template_name="blog/sign_in.html",
         authentication_form=forms.SigninForm
         ), name="sign_in"),
-    url(r"^sign_up/$", views.SignupView.as_view(), name="sign_up")
+    url(r"^sign_up/$", views.SignupView.as_view(), name="sign_up"),
+    url(r"^home/$", views.HomeView.as_view(), name="home")
 ]

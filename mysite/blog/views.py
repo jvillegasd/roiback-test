@@ -1,8 +1,9 @@
 from . import forms
+from . import models
 
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from django.views.generic.base import TemplateView
 
 from django.contrib.auth import login, logout
@@ -19,4 +20,9 @@ class IndexView(TemplateView):
 class SignupView(CreateView):
   form_class = forms.SignupForm
   template_name = "blog/sign_up.html"
-  success_url = reverse_lazy("sign_in")
+  success_url = reverse_lazy("blog:sign_in")
+
+
+class HomeView(ListView):
+  model = models.Post
+  template_name = "blog/home.html"
