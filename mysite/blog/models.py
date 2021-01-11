@@ -50,7 +50,7 @@ class Post(models.Model):
   content = models.TextField()
   likes = models.ManyToManyField(User, related_name="likes")
   comments = models.ManyToManyField(PostComment, related_name="comments")
-  tags = TaggableManager()
+  tags = TaggableManager(blank=True)
   category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
   status = models.CharField(choices=POST_STATUS, default="draft", max_length=13)
   publish_date = models.DateTimeField()

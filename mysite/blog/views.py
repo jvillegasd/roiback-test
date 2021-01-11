@@ -39,6 +39,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     self.object = form.save(commit=False)
     self.object.author = self.request.user
     self.object.save()
+    form.save_m2m()
     return HttpResponseRedirect(self.get_success_url())
 
 

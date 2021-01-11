@@ -3,9 +3,29 @@
 {% load static %}
 
 {% block css %}
-  <link rel="stylesheet" type="text/css" href="{% static 'blog/css/home.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'blog/css/view_post.css' %}">
 {% endblock %}
 
 {% block content %}
-  
+  <div id="view_card" class="card">
+    <div class="card-body">
+      <h3 class="card-title text-center">{{ post.title }}</h3>
+      <h6 class="text-center">By: {{ post.author.username }}</h6>
+      <p id="post_content">{{ post.content }}</p>
+      <div id="tags_cats">
+        <div id="category">
+          <span>Category: </span>{{ post.category.name }}
+        </div>
+        <div id="tags">
+          <span>Tags: </span>
+          {{ post.tags.all|join:", " }}
+          {% if post.tags.all %}
+            {{ post.tags.all|join:", " }}
+          {% else %}
+            <span>No tags</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
