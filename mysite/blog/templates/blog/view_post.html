@@ -18,7 +18,6 @@
         </div>
         <div id="tags">
           <span>Tags: </span>
-          {{ post.tags.all|join:", " }}
           {% if post.tags.all %}
             {{ post.tags.all|join:", " }}
           {% else %}

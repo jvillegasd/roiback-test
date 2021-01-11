@@ -3,6 +3,7 @@ from .models import POST_STATUS, Post, Category
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from taggit.forms import TagWidget, TagField
 
 class SigninForm(AuthenticationForm):
   
@@ -88,7 +89,7 @@ class PostForm(forms.ModelForm):
     empty_label="(Nothing)", 
     initial=0
   )
-  tag = forms.CharField(widget=forms.TextInput(
+  tag = TagField(widget=TagWidget(
     attrs={
       "class": "form-control",
       "placeholder": "Type tags separate with space"

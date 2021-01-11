@@ -36,10 +36,13 @@ class CreatePostView(LoginRequiredMixin, CreateView):
   success_url = reverse_lazy("blog:home")
   
   def form_valid(self, form):
+    tags = form.cleaned_data['tag']
     self.object = form.save(commit=False)
     self.object.author = self.request.user
     self.object.save()
-    form.save_m2m()
+    
+    if tags:
+      self.object.tags.add(*tags)
     return HttpResponseRedirect(self.get_success_url())
 
 
