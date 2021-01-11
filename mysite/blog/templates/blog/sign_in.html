@@ -16,31 +16,6 @@
 </head>
 <body>
   {% block content %}
-
-  {% if form.errors %}
-  <script>
-    $(function() {
-      $('#error_modal').modal({show: true});
-    });
-  </script>
-  {% endif %}
-
-  <div id="error_modal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Error</h5>
-        </div>
-        <div class="modal-body">
-          <p>Your username and password didn't match. Please try again.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <a href="/">
     <h1 id="web_title" class="text-center">Web blog App</h1>
   </a>

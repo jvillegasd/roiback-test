@@ -29,11 +29,15 @@ class HomeView(ListView):
 
 
 class CreatePostView(CreateView):
-  # model = models.Post
   form_class = forms.PostForm
   template_name = "blog/create_post.html"
   success_url = reverse_lazy("blog:home")
-  # fields = "__all__"
+  
+  def form_valid(self, form):
+    self.object = form.save(commit=False)
+    self.object.author = self.request.user
+    self.object.save()
+    return HttpResponseRedirect(self.get_success_url())
 
 
 class CreateCategoryView(CreateView):

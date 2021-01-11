@@ -98,7 +98,8 @@ class PostForm(forms.ModelForm):
   content = forms.CharField(widget=forms.Textarea(
     attrs={
       "class": "form-control",
-      "required": "required"
+      "required": "required",
+      "style": "resize: none;"
     }
   ))
   status = forms.ChoiceField(widget=forms.Select(
@@ -122,6 +123,7 @@ class PostForm(forms.ModelForm):
   class Meta:
     model = Post
     fields = ("title", "slug", "category", "tag", "content", "status", "publish_date", "deactivate_date")
+    exclude = ["author"]
 
 
 class CategoryForm(forms.ModelForm):

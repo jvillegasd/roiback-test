@@ -22,6 +22,7 @@
 <body class="container">
   
   <div>
+    <p>Hi, {{ user.username }}</p>
     <a href="{% url 'blog:create_category' %}">
       <button id="create_cat_btn" class="btn btn-light btn-lg">Create category</button>
     </a>
@@ -36,6 +37,30 @@
   <a href="{% url 'blog:home' %}">
     <h1 id="web_title" class="text-center">Web blog App</h1>
   </a>
+
+  {% if form.errors %}
+  <script>
+    $(function() {
+      $('#error_modal').modal({show: true});
+    });
+  </script>
+  {% endif %}
+
+  <div id="error_modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Error</h5>
+        </div>
+        <div class="modal-body">
+          <p>{{ form.errors }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   {% block content %}
   {% endblock %}
