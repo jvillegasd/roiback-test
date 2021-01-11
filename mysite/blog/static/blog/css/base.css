@@ -30,3 +30,9 @@ body {
   left: 0;
   right: 0;
 }
+
+#sign_in_btn {
+  position: absolute;
+  right: 3%;
+  top: 3%;
+}

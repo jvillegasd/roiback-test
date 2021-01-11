@@ -9,6 +9,8 @@ from django.views.generic.base import TemplateView
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.urls import reverse_lazy
 
 
@@ -28,7 +30,7 @@ class HomeView(ListView):
   template_name = "blog/home.html"
 
 
-class CreatePostView(CreateView):
+class CreatePostView(LoginRequiredMixin, CreateView):
   form_class = forms.PostForm
   template_name = "blog/create_post.html"
   success_url = reverse_lazy("blog:home")
@@ -40,7 +42,7 @@ class CreatePostView(CreateView):
     return HttpResponseRedirect(self.get_success_url())
 
 
-class CreateCategoryView(CreateView):
+class CreateCategoryView(LoginRequiredMixin, CreateView):
   form_class = forms.CategoryForm
   template_name = "blog/create_category.html"
   success_url = reverse_lazy("blog:home")
