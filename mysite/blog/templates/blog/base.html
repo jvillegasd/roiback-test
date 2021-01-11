@@ -33,7 +33,9 @@
     </a>
   </div>
 
-  <h1 id="web_title" class="text-center">Web blog App</h1>
+  <a href="{% url 'blog:home' %}">
+    <h1 id="web_title" class="text-center">Web blog App</h1>
+  </a>
 
   {% block content %}
   {% endblock %}
