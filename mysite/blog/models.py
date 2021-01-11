@@ -40,7 +40,7 @@ class Post(models.Model):
   category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
   status = models.CharField(choices=POST_STATUS, default="draft", max_length=13)
   publish_date = models.DateTimeField()
-  deactivate_date = models.DateTimeField()
+  deactivate_date = models.DateTimeField(null=True)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
 

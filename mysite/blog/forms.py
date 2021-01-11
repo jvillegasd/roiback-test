@@ -86,11 +86,13 @@ class PostForm(forms.ModelForm):
       "placeholder": "New post slug"
     }
   ))
-  category = forms.ChoiceField(widget=forms.Select(
+  category = forms.ModelChoiceField(widget=forms.Select(
     attrs={
       "class": "form-control",
     }),
-    choices=TAGS
+    queryset=Category.objects.all(), 
+    empty_label="(Nothing)", 
+    initial=0
   )
   tag = forms.CharField(widget=forms.TextInput(
     attrs={
