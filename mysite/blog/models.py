@@ -30,12 +30,25 @@ class Category(models.Model):
     return f"<Category: {self.name}>"
 
 
+class PostComment(models.Model):
+  author = models.ForeignKey(User, on_delete=models.CASCADE)
+  content = models.TextField()
+  posted_at = models.DateTimeField(auto_now_add=True)
+
+  class Meta:
+    ordering = ["-posted_at"]
+  
+  def __str__(self):
+    return f"<PostComent: {self.author.username}, {self.post.title}>"
+
+
 class Post(models.Model):
   title = models.CharField(max_length=300, unique=True)
   slug = models.SlugField(max_length=200, unique=True)
   author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
   content = models.TextField()
   likes = models.ManyToManyField(User, related_name="likes")
+  comments = models.ManyToManyField(PostComment, related_name="comments")
   tags = TaggableManager()
   category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
   status = models.CharField(choices=POST_STATUS, default="draft", max_length=13)
@@ -52,24 +65,11 @@ class Post(models.Model):
   
   @property
   def number_of_comments(self):
-    return PostComent.objects.filter(post=self).count()
+    return self.comments.count()
   
   @property
   def number_of_likes(self):
     return self.likes.count()
-
-
-class PostComment(models.Model):
-  post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="blog_comments")
-  author = models.ForeignKey(User, on_delete=models.CASCADE)
-  content = models.TextField()
-  posted_at = models.DateTimeField(auto_now_add=True)
-
-  class Meta:
-    ordering = ["-posted_at"]
-  
-  def __str__(self):
-    return f"<PostComent: {self.author.username}, {self.post.title}>"
 
 
 class Transaction(models.Model):

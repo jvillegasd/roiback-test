@@ -22,7 +22,12 @@
 <body class="container">
   
   <div>
-    <p>Hi, {{ user.username }}</p>
+    {% if user.is_authenticated %}
+      <p id="nav_username">Hi, {{ user.username }}!</p>
+      {% else %}
+      <p id="nav_username">Hi, Anon user!</p>
+    {% endif %}
+
     <a href="{% url 'blog:create_category' %}">
       <button id="create_cat_btn" class="btn btn-light btn-lg">Create category</button>
     </a>

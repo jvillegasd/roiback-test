@@ -12,24 +12,33 @@
       <h3 class="card-title text-center">Last entries</h3>
       
       <div id="entries_list">
-        <div class="card entry_item">
-          <div class="card-body">
-            <h4>Some random title</h4>
-            <span>By: </span>
-            <a>Some username</a>
-            
-            <div class="entry_stats">
-              <div class="like_stat">
-                <i class="fa fa-heart"></i>
-                <span>5</span>
-              </div>
-              <div class="comment_stat">
-                <i class="fa fa-comment"></i>
-                <span>10</span>
+
+        {% if object_list %}
+          {% for post in object_list %}
+            <div class="card entry_item">
+              <div class="card-body">
+                <h4>{{ post.title }}</h4>
+                <span>By: </span>
+                <a>{{ post.author.username }}</a>
+                
+                <div class="entry_stats">
+                  <div class="like_stat">
+                    <i class="fa fa-heart"></i>
+                    <span>{{ post.number_of_likes }}</span>
+                  </div>
+                  <div class="comment_stat">
+                    <i class="fa fa-comment"></i>
+                    <span>{{ post.number_of_comments }}</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          {% endfor %}
+        {% else %}
+          {{ Post }}
+          <p>Empty field</p> 
+        {% endif %}
+        
       </div>
 
     </div>

@@ -56,7 +56,8 @@ body {
 }
 
 .entry_item {
-  width: 600px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .entry_item > .card-body {
@@ -65,7 +66,7 @@ body {
 
 #entries_list {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   margin-top: 40px;
 }
 
