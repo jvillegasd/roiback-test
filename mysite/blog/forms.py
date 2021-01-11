@@ -64,12 +64,6 @@ class SignupForm(UserCreationForm):
     fields = ("username", "password1", "password2")
 
 
-TAGS = (
-  ("dont", "Dont"),
-  ("do", "Do"),
-  ("that", "That")
-)
-
 class PostForm(forms.ModelForm):
 
   title = forms.CharField(widget=forms.TextInput(
