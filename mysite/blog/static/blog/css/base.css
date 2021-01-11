@@ -1,5 +1,6 @@
 body {
-  height: 100vh;
+  height: 100%;
+  background-attachment: fixed !important;
   background: linear-gradient(rgba(0, 94, 238, 0.8) 45%, #ffffff 0%)
 }
 
@@ -14,6 +15,13 @@ body {
   right: 220px;
   top: 3%;
 }
+
+#create_cat_btn {
+  position: absolute;
+  right: 420px;
+  top: 3%;
+}
+
 
 #web_title {
   color: white;

@@ -26,3 +26,17 @@ class SignupView(CreateView):
 class HomeView(ListView):
   model = models.Post
   template_name = "blog/home.html"
+
+
+class CreatePostView(CreateView):
+  # model = models.Post
+  form_class = forms.PostForm
+  template_name = "blog/create_post.html"
+  success_url = reverse_lazy("blog:home")
+  # fields = "__all__"
+
+
+class CreateCategoryView(CreateView):
+  form_class = forms.CategoryForm
+  template_name = "blog/create_category.html"
+  success_url = reverse_lazy("blog:home")

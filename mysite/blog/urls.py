@@ -11,5 +11,7 @@ urlpatterns = [
         ), name="sign_in"),
     url(r"^sign_up/$", views.SignupView.as_view(), name="sign_up"),
     url(r"^logout/$", auth_views.LogoutView.as_view(), name="logout"),
-    url(r"^home/$", views.HomeView.as_view(), name="home")
+    url(r"^home/$", views.HomeView.as_view(), name="home"),
+    url(r"^create/$", views.CreatePostView.as_view(), name="create_post"),
+    url(r"^create_category/$", views.CreateCategoryView.as_view(), name="create_category")
 ]

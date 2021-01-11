@@ -1,0 +1,18 @@
+#post_edit {
+  border-radius: 20px !important;
+  height: 230px !important;
+  width: 800px;
+  position: absolute;
+	top: 22%;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+#form_btn {
+  position: absolute;
+  top: 70%;
+  left: 43%;
+  margin: 0;
+}

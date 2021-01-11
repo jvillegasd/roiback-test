@@ -22,7 +22,12 @@
 <body class="container">
   
   <div>
-    <button id="create_post_btn" class="btn btn-light btn-lg">Create post</button>
+    <a href="{% url 'blog:create_category' %}">
+      <button id="create_cat_btn" class="btn btn-light btn-lg">Create category</button>
+    </a>
+    <a href="{% url 'blog:create_post' %}">
+      <button id="create_post_btn" class="btn btn-light btn-lg">Create post</button>
+    </a>
     <a href="{% url 'blog:logout' %}">
       <button id="logout_btn" class="btn btn-outline-light btn-lg">Log out</button>
     </a>
