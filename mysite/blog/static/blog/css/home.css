@@ -23,6 +23,10 @@ body {
   right: 0;
 }
 
+#entry-ref {
+  color: inherit;
+}
+
 #card_entries {
   border-radius: 20px !important;
   height: 550px !important;

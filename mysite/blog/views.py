@@ -3,7 +3,7 @@ from . import models
 
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 from django.views.generic.base import TemplateView
 
 from django.contrib.auth import login, logout
@@ -46,3 +46,8 @@ class CreateCategoryView(LoginRequiredMixin, CreateView):
   form_class = forms.CategoryForm
   template_name = "blog/create_category.html"
   success_url = reverse_lazy("blog:home")
+
+
+class PostView(DetailView):
+  model = models.Post
+  template_name = "blog/view_post.html"

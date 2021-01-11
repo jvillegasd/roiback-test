@@ -1,17 +1,18 @@
 from . import views
 from . import forms
-from django.conf.urls import url
+from django.urls import path
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    url(r"^$", views.IndexView.as_view(), name="index"),
-    url(r"^sign_in/$", auth_views.LoginView.as_view(
+    path("", views.IndexView.as_view(), name="index"),
+    path("sign_in/", auth_views.LoginView.as_view(
         template_name="blog/sign_in.html",
         authentication_form=forms.SigninForm
         ), name="sign_in"),
-    url(r"^sign_up/$", views.SignupView.as_view(), name="sign_up"),
-    url(r"^logout/$", auth_views.LogoutView.as_view(), name="logout"),
-    url(r"^home/$", views.HomeView.as_view(), name="home"),
-    url(r"^create/$", views.CreatePostView.as_view(), name="create_post"),
-    url(r"^create_category/$", views.CreateCategoryView.as_view(), name="create_category")
+    path("sign_up/", views.SignupView.as_view(), name="sign_up"),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("home/", views.HomeView.as_view(), name="home"),
+    path("create_post/", views.CreatePostView.as_view(), name="create_post"),
+    path("create_category/", views.CreateCategoryView.as_view(), name="create_category"),
+    path("post/<slug:slug>/", views.PostView.as_view(), name="view_post")
 ]
