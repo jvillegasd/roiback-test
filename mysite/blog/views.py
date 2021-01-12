@@ -1,6 +1,8 @@
 from . import forms
 from . import models
 
+from django.shortcuts import get_object_or_404
+
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DetailView
@@ -11,7 +13,7 @@ from django.contrib.auth.forms import AuthenticationForm
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 
 # Create your views here.
@@ -55,3 +57,25 @@ class CreateCategoryView(LoginRequiredMixin, CreateView):
 class PostView(DetailView):
   model = models.Post
   template_name = "blog/view_post.html"
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context["comment_form"] = forms.CommentForm
+    return context
+
+
+class CreateCommentView(LoginRequiredMixin, CreateView):
+  model = models.PostComment
+  form_class = forms.CommentForm
+  
+  def get_success_url(self):
+    return reverse("blog:view_post", kwargs={"slug": self.object.post.slug})
+
+  def form_valid(self, form):
+    post = get_object_or_404(models.Post, slug=self.kwargs["slug"])
+    self.object = form.save(commit=False)
+    self.object.post = post
+    self.object.author = self.request.user
+    self.object.save()
+    
+    return HttpResponseRedirect(self.get_success_url())

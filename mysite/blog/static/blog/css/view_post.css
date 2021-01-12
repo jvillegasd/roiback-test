@@ -2,12 +2,11 @@
   border-radius: 20px !important;
   height: 600px !important;
   width: 800px;
-  position: absolute;
-	top: 15%;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin: auto;
+
+}
+
+#post_container {
+  margin-top: 200px;
 }
 
 #post_content {
@@ -16,4 +15,10 @@
   overflow-y: scroll;
   width: 100%;
   display: inline-block;
+}
+
+#comments_section {
+  margin-top: 30px;
+  width: 800px;
+  border-radius: 20px !important;
 }

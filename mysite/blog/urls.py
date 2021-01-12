@@ -14,5 +14,6 @@ urlpatterns = [
     path("home/", views.HomeView.as_view(), name="home"),
     path("create_post/", views.CreatePostView.as_view(), name="create_post"),
     path("create_category/", views.CreateCategoryView.as_view(), name="create_category"),
-    path("post/<slug:slug>/", views.PostView.as_view(), name="view_post")
+    path("post/<slug:slug>/", views.PostView.as_view(), name="view_post"),
+    path("post/<slug:slug>/add_comment/", views.CreateCommentView.as_view(), name="add_comment")
 ]

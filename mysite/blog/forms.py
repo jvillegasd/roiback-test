@@ -1,5 +1,5 @@
 import datetime
-from .models import POST_STATUS, Post, Category
+from .models import POST_STATUS, Post, Category, PostComment
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
@@ -86,8 +86,8 @@ class PostForm(forms.ModelForm):
       "class": "form-control",
     }),
     queryset=Category.objects.all(), 
-    empty_label="(Nothing)", 
-    initial=0
+    empty_label="(Nothing)",
+    required=False
   )
   tag = TagField(widget=TagWidget(
     attrs={
@@ -147,3 +147,18 @@ class CategoryForm(forms.ModelForm):
   class Meta:
     model = Category
     fields = ("name", "slug")
+
+
+class CommentForm(forms.ModelForm):
+
+  content = forms.CharField(widget=forms.Textarea(
+    attrs={
+      "class": "form-control",
+      "required": "required",
+      "style": "resize: none; width: 100%; overflow-y: scroll; display: inline-block; height: 100px;"
+    }
+  ))
+
+  class Meta:
+    model = PostComment
+    fields = ("content",)
