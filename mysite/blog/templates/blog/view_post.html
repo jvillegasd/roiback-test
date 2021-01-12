@@ -49,6 +49,12 @@
             <span>{{ post.blog_comments.all.count }}</span>
           </div>
         </div>
+
+        <div id="edit_btn" class="mb-3 text-center">
+          <a href="{% url 'blog:edit_post' post.slug %}">
+            <button class="btn btn-primary">Edit</button>
+          </a>
+        </div>
       
       </div>
     </div>
