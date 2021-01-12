@@ -61,6 +61,12 @@ class PostView(DetailView):
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     context["comment_form"] = forms.CommentForm
+    liked_post = False
+
+    if self.request.user.is_authenticated:
+      liked_post = self.request.user.likes.filter(slug=self.kwargs["slug"]).exists()
+    
+    context["liked_post"] = liked_post
     return context
 
 
@@ -78,3 +84,21 @@ class CreateCommentView(LoginRequiredMixin, CreateView):
     self.object.save()
     
     return HttpResponseRedirect(self.get_success_url())
+
+
+def LikePostView(request, slug):
+  post = get_object_or_404(models.Post, slug=slug)
+  post.likes.add(request.user)
+  
+  return HttpResponseRedirect(
+    reverse("blog:view_post", kwargs={"slug": slug})
+  )
+
+
+def UnlikePostView(request, slug):
+  post = get_object_or_404(models.Post, slug=slug)
+  post.likes.remove(request.user)
+  
+  return HttpResponseRedirect(
+    reverse("blog:view_post", kwargs={"slug": slug})
+  )

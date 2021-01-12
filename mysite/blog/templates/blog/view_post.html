@@ -26,6 +26,30 @@
             {% endif %}
           </div>
         </div>
+
+        <div class="entry_stats">
+          <div class="like_stat">
+            {% if user.is_authenticated %}
+              <form method="post" role="form" action="{% url liked_post|yesno:'blog:unlike_post,blog:like_post' post.slug %}">
+                {% csrf_token %}
+                <button id="like_btn" type="submit">
+                  <i class="fa fa-heart {% if liked_post %} heart-liked {% endif %}"></i>
+                </button>
+                <span>{{ post.number_of_likes }}</span>
+              </form>
+            {% else %}
+              <div>
+                <i class="fa fa-heart {% if liked_post %} heart-liked {% endif %}"></i>
+                <span>{{ post.number_of_likes }}</span>
+              </div>
+            {% endif %}
+          </div>
+          <div class="comment_stat">
+            <i class="fa fa-comment"></i>
+            <span>{{ post.blog_comments.all.count }}</span>
+          </div>
+        </div>
+      
       </div>
     </div>
     
@@ -37,8 +61,9 @@
             <div class="card entry_item">
               <div class="card-body">
                 <p>{{ comment.content }}</p>
-                <span>By: </span>
-                <a>{{ comment.author.username }}</a>
+              </div>
+              <div class="card-footer text-muted">
+                <span>By: {{ comment.author.username }}</span>
               </div>
             </div>
           {% empty %}

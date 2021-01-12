@@ -24,12 +24,31 @@
 
 .entry_item {
   overflow-y: scroll;
-  height: 100px;
+  height: 130px;
   margin-bottom: 20px;
+}
+
+.entry_stats {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+}
+
+.comment_stat {
+  margin-left: 20px !important;
 }
 
 #comments_entries {
   overflow-y: scroll;
   height: 420px !important;
   border-radius: 10px;
+}
+
+.heart-liked {
+  color: wheat;
+}
+
+#like_btn {
+  background-color: white;
+  border-style: none;
 }
