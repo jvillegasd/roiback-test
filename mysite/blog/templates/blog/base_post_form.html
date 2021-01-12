@@ -1,0 +1,67 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'blog/css/post.css' %}">
+{% endblock %}
+
+{% block content %} 
+  <div id="post_edit" class="card">
+    <div class="card-body">
+      <h3 class="card-title text-center">{% block h3 %}{% endblock %}</h3>
+      <form id="create_post" method="post" role="form">
+        {% csrf_token %}
+        <div class="form-group mb-3 row">
+          <div class="col-sm-6">
+            <label for="{{ form.title.id_for_label }}" class="form-label">Title</label>
+            {{ form.title }}
+          </div>
+          <div class="col-sm-6">
+            <label for="{{ form.slug.id_for_label }}" class="form-label">Slug</label>
+            {{ form.slug }}
+          </div>
+        </div>
+
+        <div class="form-group mb-3 row">
+          <div class="col-sm-6">
+            <label for="{{ form.category.id_for_label }}" class="form-label">Category</label>
+            {{ form.category }}
+          </div>
+          <div class="col-sm-6">
+            <label for="{{ form.tag.id_for_label }}" class="form-label">Tags</label>
+            {{ form.tag }}
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="{{ form.content.id_for_label }}" class="form-label">Content</label>
+          {{ form.content }}
+        </div>
+
+
+        <div class="form-group mb-3 row">
+          <div class="col-sm-6">
+            <label for="{{ form.publish_date.id_for_label }}" class="form-label">Publish date</label>
+            {{ form.publish_date }}
+          </div>
+          <div class="col-sm-6">
+            <label for="{{ form.deactivate_date.id_for_label }}" class="form-label">Deactivate date</label>
+            {{ form.deactivate_date }}
+          </div>
+        </div>
+
+        <div class="form-group mb-3 row">
+          <div class="col-sm-6">
+            <label for="{{ form.status.id_for_label }}" class="form-label">Status</label>
+            {{ form.status }}
+          </div>
+          
+          <div class="col-sm-3" id="form_btn">
+            <button type="submit" class="btn btn-primary btn-md ">{% block button %}{% endblock %}</button> 
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
