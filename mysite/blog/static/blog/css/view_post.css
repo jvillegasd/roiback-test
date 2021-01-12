@@ -2,7 +2,6 @@
   border-radius: 20px !important;
   height: 600px !important;
   width: 800px;
-
 }
 
 #post_container {
@@ -21,4 +20,16 @@
   margin-top: 30px;
   width: 800px;
   border-radius: 20px !important;
+}
+
+.entry_item {
+  overflow-y: scroll;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+#comments_entries {
+  overflow-y: scroll;
+  height: 420px !important;
+  border-radius: 10px;
 }

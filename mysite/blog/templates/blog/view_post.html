@@ -32,25 +32,37 @@
     <div id="comments_section" class="card col-md-6">
       <div class="card-body">
         <h3 class="card-title text-center">Comments section</h3>
-        <div id="comments_entries">
-          {{ post.blog_comments.all }}
+        <div id="comments_entries" class="border border-secondary">
+          {% for comment in post.blog_comments.all %}
+            <div class="card entry_item">
+              <div class="card-body">
+                <p>{{ comment.content }}</p>
+                <span>By: </span>
+                <a>{{ comment.author.username }}</a>
+              </div>
+            </div>
+          {% empty %}
+            <p>Empty field</p>
+          {% endfor %}
         </div>
 
-        <div id="write_comment" class="">
-          <form id="create_post" method="post" role="form" action="{% url 'blog:add_comment' post.slug %}">
-            {% csrf_token %}
-            <div class="form-group mb-3 row">
-              <div class="col-sm-12">
-                <label for="{{ form.comment_form.id_for_label }}" class="form-label">
-                  <b>Leave a comment!</b>
-                </label>
-                {{ comment_form.content }}
+        {% if user.is_authenticated %}
+          <div id="write_comment">
+            <form id="create_post" method="post" role="form" action="{% url 'blog:add_comment' post.slug %}">
+              {% csrf_token %}
+              <div class="form-group mb-3 row">
+                <div class="col-sm-12">
+                  <label for="{{ form.comment_form.id_for_label }}" class="form-label">
+                    <b>Leave a comment!</b>
+                  </label>
+                  {{ comment_form.content }}
+                </div>
+              <div class="form-group mb-3 text-center" id="form_btn">
+                <button type="submit" class="btn btn-primary btn-md ">Comment</button> 
               </div>
-            <div class="form-group mb-3 text-center" id="form_btn">
-              <button type="submit" class="btn btn-primary btn-md ">Comment</button> 
-            </div>
-          </form>
-        </div>
+            </form>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>

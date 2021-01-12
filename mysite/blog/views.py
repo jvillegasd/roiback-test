@@ -65,7 +65,6 @@ class PostView(DetailView):
 
 
 class CreateCommentView(LoginRequiredMixin, CreateView):
-  model = models.PostComment
   form_class = forms.CommentForm
   
   def get_success_url(self):
