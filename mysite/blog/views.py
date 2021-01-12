@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django.views.generic.base import TemplateView
 
 from django.contrib.auth import login, logout
@@ -38,7 +38,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
   success_url = reverse_lazy("blog:home")
   
   def form_valid(self, form):
-    tags = form.cleaned_data['tag']
+    tags = form.cleaned_data["tag"]
     self.object = form.save(commit=False)
     self.object.author = self.request.user
     self.object.save()
@@ -48,10 +48,23 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     return HttpResponseRedirect(self.get_success_url())
 
 
-class CreateCategoryView(LoginRequiredMixin, CreateView):
-  form_class = forms.CategoryForm
-  template_name = "blog/create_category.html"
-  success_url = reverse_lazy("blog:home")
+class EditPostView(LoginRequiredMixin, UpdateView):
+  model = models.Post
+  form_class = forms.PostForm
+  template_name = "blog/edit_post.html"
+
+  def get_success_url(self):
+    return reverse("blog:view_post", kwargs={"slug": self.object.slug})
+  
+  def form_valid(self, form):
+    tags = form.cleaned_data["tag"]
+    self.object = form.save(commit=False)
+    self.object.author = self.request.user
+    self.object.save()
+    
+    if tags:
+      self.object.tags.add(*tags)
+    return HttpResponseRedirect(self.get_success_url())
 
 
 class PostView(DetailView):
@@ -102,3 +115,9 @@ def UnlikePostView(request, slug):
   return HttpResponseRedirect(
     reverse("blog:view_post", kwargs={"slug": slug})
   )
+
+
+class CreateCategoryView(LoginRequiredMixin, CreateView):
+  form_class = forms.CategoryForm
+  template_name = "blog/create_category.html"
+  success_url = reverse_lazy("blog:home")

@@ -17,5 +17,6 @@ urlpatterns = [
     path("post/<slug:slug>/", views.PostView.as_view(), name="view_post"),
     path("post/<slug:slug>/add_comment/", views.CreateCommentView.as_view(), name="add_comment"),
     path("post/<slug:slug>/like/", views.LikePostView, name="like_post"),
-    path("post/<slug:slug>/unlike/", views.UnlikePostView, name="unlike_post")
+    path("post/<slug:slug>/unlike/", views.UnlikePostView, name="unlike_post"),
+    path("post/<slug:slug>/edit/", views.EditPostView.as_view(), name="edit_post")
 ]
