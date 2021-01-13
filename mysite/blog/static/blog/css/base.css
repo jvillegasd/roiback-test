@@ -36,3 +36,9 @@ body {
   right: 3%;
   top: 3%;
 }
+
+#nav_username {
+  color: white;
+  font-size: 35px;
+  margin-top: 22px;
+}
