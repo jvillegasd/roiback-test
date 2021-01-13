@@ -4,6 +4,7 @@ from . import models
 from django.shortcuts import get_object_or_404
 
 from django.template import loader
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django.views.generic.base import TemplateView
@@ -52,6 +53,13 @@ class EditPostView(LoginRequiredMixin, UpdateView):
   model = models.Post
   form_class = forms.PostForm
   template_name = "blog/edit_post.html"
+
+  def dispatch(self, request, *args, **kwargs):
+    handler = super().dispatch(request, *args, **kwargs)
+    
+    if not (self.request.user == self.object.author or self.request.user.is_superuser):
+      raise PermissionDenied
+    return handler
 
   def get_success_url(self):
     return reverse("blog:view_post", kwargs={"slug": self.object.slug})

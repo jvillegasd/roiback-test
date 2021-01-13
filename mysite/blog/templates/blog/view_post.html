@@ -50,11 +50,13 @@
           </div>
         </div>
 
-        <div id="edit_btn" class="mb-3 text-center">
-          <a href="{% url 'blog:edit_post' post.slug %}">
-            <button class="btn btn-primary">Edit</button>
-          </a>
-        </div>
+        {% if user.is_authenticated and user.id == post.author.id %}
+          <div id="edit_btn" class="mb-3 text-center">
+            <a href="{% url 'blog:edit_post' post.slug %}">
+              <button class="btn btn-primary">Edit</button>
+            </a>
+          </div>
+        {% endif %}
       
       </div>
     </div>
