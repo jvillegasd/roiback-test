@@ -1,11 +1,13 @@
 {% extends 'blog/base_post_feed.html' %}
 
-{% block h3 %}Users posts{% endblock %}
+{% block h3 %}
+  Posts by tag: {{ view.kwargs.tag }}
+{% endblock %}
 
 {% block entries_list %}
 
-  {% if object_list %}
-    {% for post in object_list %}
+  {% if filtered_posts %}
+    {% for post in filtered_posts %}
       <div class="card entry_item">
         <div class="card-body">
           <h4>{{ post.title }}</h4>

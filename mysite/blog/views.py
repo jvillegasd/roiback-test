@@ -1,20 +1,15 @@
 from . import forms
 from . import models
-
-from django.shortcuts import get_object_or_404
-
 from django.template import loader
+from django.urls import reverse_lazy, reverse
+from django.contrib.auth import login, logout
+from django.shortcuts import get_object_or_404
+from django.views.generic.base import TemplateView
 from django.core.exceptions import PermissionDenied
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
-from django.views.generic.base import TemplateView
-
-from django.contrib.auth import login, logout
-from django.contrib.auth.forms import AuthenticationForm
-
-from django.contrib.auth.mixins import LoginRequiredMixin
-
-from django.urls import reverse_lazy, reverse
 
 
 # Create your views here.
@@ -137,3 +132,49 @@ class CreateCategoryView(LoginRequiredMixin, CreateView):
   form_class = forms.CategoryForm
   template_name = "blog/create_category.html"
   success_url = reverse_lazy("blog:home")
+
+
+class AuthorFilterView(ListView):
+  model = models.Post
+  template_name = "blog/author_filter.html"
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    selected_author = get_object_or_404(models.User, username=self.kwargs["username"])
+
+    context["filtered_posts"] = models.Post.objects.filter(author=selected_author)
+    context["categories"] = models.Category.objects.all()
+    context["authors"] = models.User.objects.filter(blog_posts__isnull=False).distinct("username")
+    context["tags"] = models.Tag.objects.all()
+    
+    return context
+
+
+class CategoryFilterView(ListView):
+  model = models.Post
+  template_name = "blog/category_filter.html"
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    selected_category = get_object_or_404(models.Category, slug=self.kwargs["slug"])
+
+    context["filtered_posts"] = models.Post.objects.filter(category=selected_category)
+    context["categories"] = models.Category.objects.all()
+    context["authors"] = models.User.objects.filter(blog_posts__isnull=False).distinct("username")
+    context["tags"] = models.Tag.objects.all()
+    
+    return context
+
+
+class TagsFilterView(ListView):
+  model = models.Post
+  template_name = "blog/tags_filter.html"
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context["filtered_posts"] = models.Post.objects.filter(tags__name__in=[self.kwargs["tag"]])
+    context["categories"] = models.Category.objects.all()
+    context["authors"] = models.User.objects.filter(blog_posts__isnull=False).distinct("username")
+    context["tags"] = models.Tag.objects.all()
+    
+    return context

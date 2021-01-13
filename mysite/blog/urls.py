@@ -18,5 +18,8 @@ urlpatterns = [
     path("post/<slug:slug>/add_comment/", views.CreateCommentView.as_view(), name="add_comment"),
     path("post/<slug:slug>/like/", views.LikePostView, name="like_post"),
     path("post/<slug:slug>/unlike/", views.UnlikePostView, name="unlike_post"),
-    path("post/<slug:slug>/edit/", views.EditPostView.as_view(), name="edit_post")
+    path("post/<slug:slug>/edit/", views.EditPostView.as_view(), name="edit_post"),
+    path("filter/author/<str:username>/", views.AuthorFilterView.as_view(), name="author_filter"),
+    path("filter/category/<slug:slug>/", views.CategoryFilterView.as_view(), name="category_filter"),
+    path("filter/tags/<str:tag>/", views.TagsFilterView.as_view(), name="tags_filter")
 ]
