@@ -51,9 +51,12 @@
         </div>
 
         {% if user.is_authenticated and user.id == post.author.id %}
-          <div id="edit_btn" class="mb-3 text-center">
+          <div id="options" class="mb-3 text-center">
             <a href="{% url 'blog:edit_post' post.slug %}">
               <button class="btn btn-primary">Edit</button>
+            </a>
+            <a href="{% url 'blog:delete_post' post.slug %}">
+              <button class="btn btn-danger">Delete</button>
             </a>
           </div>
         {% endif %}

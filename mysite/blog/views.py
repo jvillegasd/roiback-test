@@ -128,6 +128,15 @@ def UnlikePostView(request, slug):
   )
 
 
+def DeletePostView(request, slug):
+  post = get_object_or_404(models.Post, slug=slug)
+  post.delete()
+  
+  return HttpResponseRedirect(
+    reverse_lazy("blog:home")
+  )
+
+
 class CreateCategoryView(LoginRequiredMixin, CreateView):
   form_class = forms.CategoryForm
   template_name = "blog/create_category.html"
