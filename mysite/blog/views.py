@@ -32,6 +32,14 @@ class HomeView(ListView):
   model = models.Post
   template_name = "blog/home.html"
 
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context["categories"] = models.Category.objects.all()
+    context["authors"] = models.User.objects.filter(blog_posts__isnull=False).distinct("username")
+    context["tags"] = models.Tag.objects.all()
+    
+    return context
+
 
 class CreatePostView(LoginRequiredMixin, CreateView):
   form_class = forms.PostForm

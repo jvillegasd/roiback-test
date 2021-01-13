@@ -48,11 +48,48 @@
   <div id="card_filters" class="card">
     <div class="card-body  text-center">
       <h3 class="card-title">Filters</h3>
-      <div id="btn_filters" class="btn-group-vertical btn-md w-75" role="group" aria-label="filters">
+
+      <div id="dropdown_filters">
+        <div class="btn-group btn-md w-75" role="group">
+          <button id="btnGroupDrop1" type="button" class="btn btn-light border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Author
+          </button>
+          <div class="dropdown-menu w-100" aria-labelledby="btnGroupDrop1">
+            {% for author in authors %}
+              <a class="dropdown-item" href="#">{{ author }}</a>
+            {% endfor %}
+          </div>
+        </div>
+  
+        <div class="btn-group btn-md w-75" role="group">
+          <button id="btnGroupDrop2" type="button" class="btn btn-light border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Category
+          </button>
+          <div class="dropdown-menu w-100" aria-labelledby="btnGroupDrop2">
+            {% for category in categories %}
+              <a class="dropdown-item" href="#">{{ category.name }}</a>
+            {% endfor %}
+          </div>
+        </div>
+  
+        <div class="btn-group btn-md w-75" role="group">
+          <button id="btnGroupDrop3" type="button" class="btn btn-light border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Tags
+          </button>
+          <div class="dropdown-menu w-100" aria-labelledby="btnGroupDrop3">
+            {% for tag in tags %}
+              <a class="dropdown-item" href="#">{{ tag }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- <div id="btn_filters" class="btn-group-vertical btn-md w-75" role="group" aria-label="filters">
         <button type="button" class="btn btn-light border">Author</button>
         <button type="button" class="btn btn-light border">Category</button>
         <button type="button" class="btn btn-light border">Tags</button>
-      </div>
+        <button type="button" class="btn btn-danger">Delete filters</button>
+      </div> -->
     </div>
   </div>
 {% endblock %}
