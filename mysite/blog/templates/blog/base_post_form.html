@@ -4,9 +4,29 @@
 
 {% block css %}
   <link rel="stylesheet" type="text/css" href="{% static 'blog/css/post.css' %}">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
+    
+{% endblock %}
+
+{% block script %}
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 {% endblock %}
 
 {% block content %} 
+  <script>
+    $(function() {
+      $(".datepicker").datepicker({
+        altFormat: "dd/mm/yy",
+        dateFormat: "dd/mm/yy"
+      });
+    });
+
+    $(".datepicker").datepicker("option", "altFormat", "yy-mm-dd" );
+  </script>
+
+  
   <div id="post_edit" class="card">
     <div class="card-body">
       <h3 class="card-title text-center">{% block h3 %}{% endblock %}</h3>

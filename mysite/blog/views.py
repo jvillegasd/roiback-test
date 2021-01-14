@@ -29,6 +29,7 @@ class HomeView(ListView):
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
+    context["object_list"] = models.Post.objects.get_published_posts()
     context["categories"] = models.Category.objects.all()
     context["authors"] = models.User.objects.filter(blog_posts__isnull=False).distinct("username")
     context["tags"] = models.Tag.objects.all()
@@ -154,7 +155,7 @@ class AuthorFilterView(ListView):
     context = super().get_context_data(**kwargs)
     selected_author = get_object_or_404(models.User, username=self.kwargs["username"])
 
-    context["filtered_posts"] = models.Post.objects.filter(author=selected_author)
+    context["filtered_posts"] = models.Post.objects.get_posts_by_author(selected_author)
     context["categories"] = models.Category.objects.all()
     context["authors"] = models.User.objects.filter(blog_posts__isnull=False).distinct("username")
     context["tags"] = models.Tag.objects.all()
@@ -170,7 +171,7 @@ class CategoryFilterView(ListView):
     context = super().get_context_data(**kwargs)
     selected_category = get_object_or_404(models.Category, slug=self.kwargs["slug"])
 
-    context["filtered_posts"] = models.Post.objects.filter(category=selected_category)
+    context["filtered_posts"] = models.Post.objects.get_posts_by_category(selected_category)
     context["categories"] = models.Category.objects.all()
     context["authors"] = models.User.objects.filter(blog_posts__isnull=False).distinct("username")
     context["tags"] = models.Tag.objects.all()
@@ -184,7 +185,7 @@ class TagsFilterView(ListView):
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    context["filtered_posts"] = models.Post.objects.filter(tags__name__in=[self.kwargs["tag"]])
+    context["filtered_posts"] = models.Post.objects.get_posts_by_tags([self.kwargs["tag"]])
     context["categories"] = models.Category.objects.all()
     context["authors"] = models.User.objects.filter(blog_posts__isnull=False).distinct("username")
     context["tags"] = models.Tag.objects.all()
