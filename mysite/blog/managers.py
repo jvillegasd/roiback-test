@@ -10,7 +10,7 @@ class PostQuerySet(models.query.QuerySet):
     posts = self.filter(
       Q(publish_date__lte=now_date) &
       Q(status="published") &
-      Q(deactivate_date=None) | Q(deactivate_date__gte=now_date)
+      (Q(deactivate_date=None) | Q(deactivate_date__gte=now_date))
     )
 
     return posts
