@@ -28,6 +28,9 @@
   <div>
     {% if user.is_authenticated %}
       <p id="nav_username">Hi, {{ user.username }}!</p>
+      <a href="{% url 'blog:author_posts' user.username %}">
+        <button id="author_posts_btn" class="btn btn-light btn-lg">My posts</button>
+      </a>
       <a href="{% url 'blog:create_category' %}">
         <button id="create_cat_btn" class="btn btn-light btn-lg">Create category</button>
       </a>

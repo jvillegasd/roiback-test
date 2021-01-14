@@ -5,13 +5,14 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
-    path("sign_in/", auth_views.LoginView.as_view(
+    path("users/sign_in/", auth_views.LoginView.as_view(
         template_name="blog/sign_in.html",
         authentication_form=forms.SigninForm
         ), name="sign_in"),
-    path("sign_up/", views.SignupView.as_view(), name="sign_up"),
-    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("users/sign_up/", views.SignupView.as_view(), name="sign_up"),
+    path("users/logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("home/", views.HomeView.as_view(), name="home"),
+    path("users/<str:username>/posts/", views.AuthorPostsView.as_view(), name="author_posts"),
     path("create_post/", views.CreatePostView.as_view(), name="create_post"),
     path("create_category/", views.CreateCategoryView.as_view(), name="create_category"),
     path("post/<slug:slug>/", views.PostView.as_view(), name="view_post"),

@@ -37,6 +37,29 @@ class HomeView(ListView):
     return context
 
 
+class AuthorPostsView(ListView):
+  model = models.Post
+  template_name = "blog/author_posts.html"
+
+  def dispatch(self, request, *args, **kwargs):
+    handler = super().dispatch(request, *args, **kwargs)
+    
+    if not (self.request.user.username == self.kwargs["username"] or self.request.user.is_superuser):
+      raise PermissionDenied
+    return handler
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    selected_author = get_object_or_404(models.User, username=self.kwargs["username"])
+
+    context["object_list"] = models.Post.objects.get_posts_by_author(selected_author)
+    context["categories"] = models.Category.objects.all()
+    context["authors"] = models.User.objects.filter(blog_posts__isnull=False).distinct("username")
+    context["tags"] = models.Tag.objects.all()
+    
+    return context
+
+
 class CreatePostView(LoginRequiredMixin, CreateView):
   form_class = forms.PostForm
   template_name = "blog/create_post.html"

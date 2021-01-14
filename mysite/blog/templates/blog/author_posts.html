@@ -1,0 +1,35 @@
+{% extends 'blog/base_post_feed.html' %}
+
+{% block h3 %}
+  {{ user.username }} posts
+{% endblock %}
+
+{% block entries_list %}
+
+  {% if object_list %}
+    {% for post in object_list %}
+      <div class="card entry_item">
+        <div class="card-body">
+          <h4>{{ post.title }}</h4>
+          <span>By: </span>
+          <a>{{ post.author.username }}</a>
+          
+          <div class="entry_stats">
+            <div class="like_stat">
+              <i class="fa fa-heart"></i>
+              <span>{{ post.number_of_likes }}</span>
+            </div>
+            <div class="comment_stat">
+              <i class="fa fa-comment"></i>
+              <span>{{ post.blog_comments.all.count }}</span>
+            </div>
+          </div>
+        </div>
+        <a class="stretched-link" href="{% url 'blog:view_post' post.slug %}"></a>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="text-center">Empty field</p> 
+  {% endif %}
+
+{% endblock %}

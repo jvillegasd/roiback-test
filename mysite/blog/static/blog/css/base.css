@@ -18,7 +18,13 @@ body {
 
 #create_cat_btn {
   position: absolute;
-  right: 420px;
+  right: 380px;
+  top: 3%;
+}
+
+#author_posts_btn {
+  position: absolute;
+  right: 580px;
   top: 3%;
 }
 
