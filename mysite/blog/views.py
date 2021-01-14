@@ -9,7 +9,7 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import CreateView, ListView, DetailView, UpdateView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 
 # Create your views here.
@@ -128,13 +128,16 @@ def UnlikePostView(request, slug):
   )
 
 
-def DeletePostView(request, slug):
-  post = get_object_or_404(models.Post, slug=slug)
-  post.delete()
-  
-  return HttpResponseRedirect(
-    reverse_lazy("blog:home")
-  )
+class DeletePostView(LoginRequiredMixin, DeleteView):
+  model = models.Post
+  success_url = reverse_lazy("blog:home")
+
+  def dispatch(self, request, *args, **kwargs):
+    handler = super().dispatch(request, *args, **kwargs)
+    
+    if not (self.request.user == self.object.author or self.request.user.is_superuser):
+      raise PermissionDenied
+    return handler
 
 
 class CreateCategoryView(LoginRequiredMixin, CreateView):
