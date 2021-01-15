@@ -26,8 +26,8 @@
 <body class="container">
   
   <div>
+    <p id="nav_username">Hi, {{ user.username|default:'Guest' }}!</p>
     {% if user.is_authenticated %}
-      <p id="nav_username">Hi, {{ user.username }}!</p>
       <a href="{% url 'blog:author_posts' user.username %}">
         <button id="author_posts_btn" class="btn btn-light btn-lg">My posts</button>
       </a>
@@ -41,7 +41,6 @@
         <button id="logout_btn" class="btn btn-outline-light btn-lg">Log out</button>
       </a>
       {% else %}
-      <p id="nav_username">Hi, Anon user!</p>
       <a href="{% url 'blog:sign_in' %}">
         <button id="sign_in_btn" class="btn btn-outline-light btn-lg">Sign in</button>
       </a>

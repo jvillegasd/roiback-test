@@ -6,7 +6,7 @@ services:
     build:
       context: ./mysite/
       dockerfile: Dockerfile
-    command: "python manage.py runserver 0.0.0.0:8000"
+    command: /bin/sh -c "entrypoint.sh"
     env_file: .env
     restart: always
     volumes:

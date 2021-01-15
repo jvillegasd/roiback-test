@@ -1,4 +1,3 @@
-  
 FROM python:3.7 
 
 LABEL Author="Johnny Villegas"
@@ -11,4 +10,8 @@ COPY requirements.txt .
 
 # Install requirements
 RUN pip3 install -r requirements.txt
-RUN python 
+
+# Copy Entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+entrypoint "/entrypoint.sh"

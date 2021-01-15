@@ -112,14 +112,16 @@ class PostForm(forms.ModelForm):
   publish_date = forms.DateTimeField(widget=forms.DateTimeInput(
     format="%d/%m/%Y",
     attrs={
-      "class": "form-control datepicker"
+      "class": "form-control datepicker",
+      "autocomplete":"off"
     }),
     input_formats=["%d/%m/%Y"]
   )
   deactivate_date = forms.DateTimeField(widget=forms.DateTimeInput(
     format="%d/%m/%Y",
     attrs={
-      "class": "form-control datepicker"
+      "class": "form-control datepicker",
+      "autocomplete":"off"
     }),
     input_formats=["%d/%m/%Y"],
     required=False
