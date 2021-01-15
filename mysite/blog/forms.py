@@ -92,7 +92,7 @@ class PostForm(forms.ModelForm):
   tag = TagField(widget=TagWidget(
     attrs={
       "class": "form-control",
-      "placeholder": "Type tags separate with space"
+      "placeholder": "tag1,tag2,..."
     }),
     required=False
   )
