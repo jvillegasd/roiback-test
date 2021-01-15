@@ -4,25 +4,18 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from .managers import PostManager
+from simple_history.models import HistoricalRecords
 
 POST_STATUS = (
   ("draft", "Draft"),
   ("published", "Published")
 )
 
-TRANSACTIONS_TYPES = (
-  ("post_creation", "Post_creation"),
-  ("post_deletion", "Post_deletion"),
-  ("Post_modification", "Post_modification"),
-  ("post_comment", "Post_comment"),
-  ("post_like", "Post_like"),
-  ("user_creation", "User_creation")
-)
-
 # Create your models here.
 class Category(models.Model):
   name = models.CharField(max_length=200, unique=True)
   slug = models.SlugField(max_length=200, unique=True)
+  history = HistoricalRecords()
 
   class Meta:
     ordering = ("name",)
@@ -47,6 +40,7 @@ class Post(models.Model):
   deactivate_date = models.DateTimeField(null=True)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
+  history = HistoricalRecords()
 
   class Meta:
     ordering = ["-created_at"]
@@ -64,21 +58,10 @@ class PostComment(models.Model):
   author = models.ForeignKey(User, on_delete=models.CASCADE)
   content = models.TextField()
   posted_at = models.DateTimeField(auto_now_add=True)
+  history = HistoricalRecords()
 
   class Meta:
     ordering = ["-posted_at"]
   
   def __str__(self):
     return f"<PostComent: {self.author.username}, {self.post.title}>"
-
-
-class Transaction(models.Model):
-  author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_transactions")
-  transaction_type = models.CharField(choices=TRANSACTIONS_TYPES, max_length=60)
-  created_at = models.DateTimeField(auto_now_add=True)
-
-  class Meta:
-    ordering = ["-created_at"]
-
-  def __str__(self):
-    return f"<Transaction: {self.author.username}, {self.transaction_type}>"
