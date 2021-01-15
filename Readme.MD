@@ -49,3 +49,7 @@ El proyecto se encuentra dockerizado, por lo cual no hay porque preocuparse por 
 ## Entrypoint y Dockerfile
 
 El archivo Dockerfile que representa la imagen Docker, se encuentra dentro de la carpeta del proyecto `mysite`. Para evitar de que se tengan que realizar las migraciones de la base de datos de manera manual, este proceso se encuentra automatizado por medio de la creación de un script bash que funciona como entrypoint del container, este archivo lo pueden encontrar en `mysite/entrypoint.sh`.
+
+## Aclaraciones
+
+Ciertos archivos como `.env` no han sido filtrados por el `.gitignore` por cuestiones de la prueba.
